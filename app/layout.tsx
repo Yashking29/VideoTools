@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     "video to gif converter",
     "no upload video editor",
   ],
-  metadataBase: new URL("https://videotools.app"),
+  metadataBase: new URL("https://zipvid.online"),
   alternates: {
     canonical: "/",
   },

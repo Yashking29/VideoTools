@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: "Free Online Video Tools — No Upload Required",
   description:
     "Compress, trim, convert, and edit videos for free. All tools run 100% in your browser — your files never leave your device.",
-  alternates: { canonical: "https://videotools.app/" },
+  alternates: { canonical: "https://zipvid.online/" },
 };
 
 const tools = [
@@ -192,7 +192,7 @@ export default function HomePage() {
             "@context": "https://schema.org",
             "@type": "WebSite",
             name: "VideoTools",
-            url: "https://videotools.app",
+            url: "https://zipvid.online",
             description: "Free online video tools — compress, trim, convert, and edit videos in your browser.",
           }),
         }}

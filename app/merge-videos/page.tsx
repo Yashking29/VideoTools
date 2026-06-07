@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description:
     "Merge and combine multiple video clips into one file for free, directly in your browser. Supports up to 6 videos. No uploads, no account.",
   keywords: ["merge videos online free", "join videos online", "combine video clips", "video joiner no upload", "merge mp4 files online"],
-  alternates: { canonical: "https://videotools.app/merge-videos" },
+  alternates: { canonical: "https://zipvid.online/merge-videos" },
   openGraph: {
     title: "Free Online Video Merger — Join Multiple Videos",
     description: "Combine multiple video clips into one in your browser. No uploads required.",
@@ -48,7 +48,7 @@ export default function MergeVideosPage() {
 
       <VideoMerger />
       <ToolSchema name="Free Online Video Merger" description="Free Online Video Merger — runs 100% in your browser, no upload required." />
-      <BreadcrumbSchema items={[{ name: "Home", url: "https://videotools.app/" }, { name: "Free Online Video Merger", url: "https://videotools.app/merge-videos" }]} />
+      <BreadcrumbSchema items={[{ name: "Home", url: "https://zipvid.online/" }, { name: "Free Online Video Merger", url: "https://zipvid.online/merge-videos" }]} />
 
       <section className="mt-20 max-w-3xl mx-auto">
         <h2 className="text-2xl font-bold text-gray-900 mb-8 text-center">Frequently Asked Questions</h2>

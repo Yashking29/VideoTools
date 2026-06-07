@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description:
     "Strip audio from any video in seconds. Mute your video file for free directly in your browser. No upload, no account, instant download.",
   keywords: ["remove audio from video", "mute video online", "strip audio from mp4", "remove sound from video free", "silent video maker"],
-  alternates: { canonical: "https://videotools.app/remove-audio" },
+  alternates: { canonical: "https://zipvid.online/remove-audio" },
   openGraph: {
     title: "Remove Audio from Video Online Free",
     description: "Mute any video instantly in your browser. No uploads, 100% private.",
@@ -47,7 +47,7 @@ export default function RemoveAudioPage() {
 
       <AudioRemover />
       <ToolSchema name="Remove Audio from Video Online" description="Remove Audio from Video Online — runs 100% in your browser, no upload required." />
-      <BreadcrumbSchema items={[{ name: "Home", url: "https://videotools.app/" }, { name: "Remove Audio from Video Online", url: "https://videotools.app/remove-audio" }]} />
+      <BreadcrumbSchema items={[{ name: "Home", url: "https://zipvid.online/" }, { name: "Remove Audio from Video Online", url: "https://zipvid.online/remove-audio" }]} />
 
       <section className="mt-20 max-w-3xl mx-auto">
         <h2 className="text-2xl font-bold text-gray-900 mb-8 text-center">Frequently Asked Questions</h2>

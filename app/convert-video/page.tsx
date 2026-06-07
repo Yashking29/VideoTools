@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description:
     "Convert video between MP4, WebM, AVI, MOV, and MKV formats for free, directly in your browser. No uploads, no account required.",
   keywords: ["online video converter", "convert mp4 to webm", "video format converter free", "convert video online no upload", "mp4 converter"],
-  alternates: { canonical: "https://videotools.app/convert-video" },
+  alternates: { canonical: "https://zipvid.online/convert-video" },
   openGraph: {
     title: "Free Online Video Converter — MP4, WebM, AVI, MOV, MKV",
     description: "Convert any video format in your browser. No uploads, 100% private.",
@@ -47,7 +47,7 @@ export default function ConvertVideoPage() {
 
       <VideoConverter />
       <ToolSchema name="Free Online Video Converter" description="Free Online Video Converter — runs 100% in your browser, no upload required." />
-      <BreadcrumbSchema items={[{ name: "Home", url: "https://videotools.app/" }, { name: "Free Online Video Converter", url: "https://videotools.app/convert-video" }]} />
+      <BreadcrumbSchema items={[{ name: "Home", url: "https://zipvid.online/" }, { name: "Free Online Video Converter", url: "https://zipvid.online/convert-video" }]} />
 
       <section className="mt-20 max-w-3xl mx-auto">
         <h2 className="text-2xl font-bold text-gray-900 mb-8 text-center">Frequently Asked Questions</h2>

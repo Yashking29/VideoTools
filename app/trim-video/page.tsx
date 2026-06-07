@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description:
     "Trim and cut any video online for free. Set start and end points, download instantly. No upload required — runs entirely in your browser.",
   keywords: ["video trimmer online", "cut video online free", "trim mp4 online", "video cutter no upload", "online video cutter"],
-  alternates: { canonical: "https://videotools.app/trim-video" },
+  alternates: { canonical: "https://zipvid.online/trim-video" },
   openGraph: {
     title: "Free Online Video Trimmer — No Upload Required",
     description: "Cut and trim any video in your browser. No uploads, instant download.",
@@ -47,7 +47,7 @@ export default function TrimVideoPage() {
 
       <VideoTrimmer />
       <ToolSchema name="Free Online Video Trimmer" description="Free Online Video Trimmer — runs 100% in your browser, no upload required." />
-      <BreadcrumbSchema items={[{ name: "Home", url: "https://videotools.app/" }, { name: "Free Online Video Trimmer", url: "https://videotools.app/trim-video" }]} />
+      <BreadcrumbSchema items={[{ name: "Home", url: "https://zipvid.online/" }, { name: "Free Online Video Trimmer", url: "https://zipvid.online/trim-video" }]} />
 
       <section className="mt-20 max-w-3xl mx-auto">
         <h2 className="text-2xl font-bold text-gray-900 mb-8 text-center">Frequently Asked Questions</h2>

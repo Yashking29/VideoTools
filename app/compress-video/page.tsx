@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     "video compressor no upload",
     "reduce video size for whatsapp",
   ],
-  alternates: { canonical: "https://videotools.app/compress-video" },
+  alternates: { canonical: "https://zipvid.online/compress-video" },
   openGraph: {
     title: "Free Video Compressor Online — No Upload Required",
     description:
@@ -108,7 +108,7 @@ export default function CompressVideoPage() {
       <VideoCompressor />
 
       <ToolSchema name="Free Online Video Compressor" description="Free online video compressor that runs in your browser. No file uploads required." />
-      <BreadcrumbSchema items={[{ name: "Home", url: "https://videotools.app/" }, { name: "Video Compressor", url: "https://videotools.app/compress-video" }]} />
+      <BreadcrumbSchema items={[{ name: "Home", url: "https://zipvid.online/" }, { name: "Video Compressor", url: "https://zipvid.online/compress-video" }]} />
 
       {/* FAQ */}
       <section className="mt-20 max-w-3xl mx-auto">

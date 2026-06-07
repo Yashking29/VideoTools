@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description:
     "Speed up or slow down any video for free in your browser. Supports 0.25× to 4× speed. Slow motion, timelapse, and fast forward — no uploads.",
   keywords: ["video speed changer", "slow motion video online", "speed up video online free", "change video speed", "timelapse video maker"],
-  alternates: { canonical: "https://videotools.app/change-video-speed" },
+  alternates: { canonical: "https://zipvid.online/change-video-speed" },
   openGraph: {
     title: "Free Video Speed Changer — Slow Motion & Fast Forward",
     description: "Change video speed from 0.25× to 4× in your browser. No uploads required.",
@@ -47,7 +47,7 @@ export default function ChangeVideoSpeedPage() {
 
       <SpeedChanger />
       <ToolSchema name="Free Video Speed Changer" description="Free Video Speed Changer — runs 100% in your browser, no upload required." />
-      <BreadcrumbSchema items={[{ name: "Home", url: "https://videotools.app/" }, { name: "Free Video Speed Changer", url: "https://videotools.app/change-video-speed" }]} />
+      <BreadcrumbSchema items={[{ name: "Home", url: "https://zipvid.online/" }, { name: "Free Video Speed Changer", url: "https://zipvid.online/change-video-speed" }]} />
 
       <section className="mt-20 max-w-3xl mx-auto">
         <h2 className="text-2xl font-bold text-gray-900 mb-8 text-center">Frequently Asked Questions</h2>

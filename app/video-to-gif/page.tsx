@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description:
     "Convert any video to an animated GIF for free, directly in your browser. Choose frame rate, size, and clip duration. No uploads, 100% private.",
   keywords: ["video to gif", "convert video to gif online", "mp4 to gif", "free gif maker", "video to gif no upload"],
-  alternates: { canonical: "https://videotools.app/video-to-gif" },
+  alternates: { canonical: "https://zipvid.online/video-to-gif" },
   openGraph: {
     title: "Free Video to GIF Converter Online",
     description: "Convert video to GIF in your browser. No uploads, instant download.",
@@ -47,7 +47,7 @@ export default function VideoToGifPage() {
 
       <VideoToGif />
       <ToolSchema name="Free Video to GIF Converter" description="Free Video to GIF Converter — runs 100% in your browser, no upload required." />
-      <BreadcrumbSchema items={[{ name: "Home", url: "https://videotools.app/" }, { name: "Free Video to GIF Converter", url: "https://videotools.app/video-to-gif" }]} />
+      <BreadcrumbSchema items={[{ name: "Home", url: "https://zipvid.online/" }, { name: "Free Video to GIF Converter", url: "https://zipvid.online/video-to-gif" }]} />
 
       <section className="mt-20 max-w-3xl mx-auto">
         <h2 className="text-2xl font-bold text-gray-900 mb-8 text-center">Frequently Asked Questions</h2>

@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description:
     "Add a custom text watermark to any video for free in your browser. Choose position, size, and opacity. No uploads, no account required.",
   keywords: ["add watermark to video", "video watermark online free", "text watermark video", "watermark video no upload", "brand video online"],
-  alternates: { canonical: "https://videotools.app/add-watermark" },
+  alternates: { canonical: "https://zipvid.online/add-watermark" },
   openGraph: {
     title: "Add Watermark to Video Online Free",
     description: "Add text watermarks to videos in your browser. No uploads required.",
@@ -47,7 +47,7 @@ export default function AddWatermarkPage() {
 
       <WatermarkAdder />
       <ToolSchema name="Add Watermark to Video Online" description="Add Watermark to Video Online — runs 100% in your browser, no upload required." />
-      <BreadcrumbSchema items={[{ name: "Home", url: "https://videotools.app/" }, { name: "Add Watermark to Video Online", url: "https://videotools.app/add-watermark" }]} />
+      <BreadcrumbSchema items={[{ name: "Home", url: "https://zipvid.online/" }, { name: "Add Watermark to Video Online", url: "https://zipvid.online/add-watermark" }]} />
 
       <section className="mt-20 max-w-3xl mx-auto">
         <h2 className="text-2xl font-bold text-gray-900 mb-8 text-center">Frequently Asked Questions</h2>
