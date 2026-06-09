@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-const BASE_URL = "https://zipvid.online";
+const BASE_URL = "https://www.zipvid.online";
 
 const routes = [
   { path: "/", priority: 1.0 },
