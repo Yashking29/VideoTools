@@ -35,13 +35,21 @@ export default function VideoCompressor() {
     ffmpeg.on("log", ({ message }) => setLog(message));
     const mtURL = "https://unpkg.com/@ffmpeg/core-mt@0.12.6/dist/esm";
     const stURL = "https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd";
-    try {
-      await ffmpeg.load({
-        coreURL: await toBlobURL(`${mtURL}/ffmpeg-core.js`, "text/javascript"),
-        wasmURL: await toBlobURL(`${mtURL}/ffmpeg-core.wasm`, "application/wasm"),
-        workerURL: await toBlobURL(`${mtURL}/ffmpeg-core.worker.js`, "text/javascript"),
-      });
-    } catch {
+    const canMultiThread = typeof SharedArrayBuffer !== "undefined";
+    if (canMultiThread) {
+      try {
+        await ffmpeg.load({
+          coreURL: await toBlobURL(`${mtURL}/ffmpeg-core.js`, "text/javascript"),
+          wasmURL: `${mtURL}/ffmpeg-core.wasm`,
+          workerURL: `${mtURL}/ffmpeg-core.worker.js`,
+        });
+      } catch {
+        await ffmpeg.load({
+          coreURL: await toBlobURL(`${stURL}/ffmpeg-core.js`, "text/javascript"),
+          wasmURL: await toBlobURL(`${stURL}/ffmpeg-core.wasm`, "application/wasm"),
+        });
+      }
+    } else {
       await ffmpeg.load({
         coreURL: await toBlobURL(`${stURL}/ffmpeg-core.js`, "text/javascript"),
         wasmURL: await toBlobURL(`${stURL}/ffmpeg-core.wasm`, "application/wasm"),
@@ -108,7 +116,6 @@ export default function VideoCompressor() {
     }
   };
 
-  const selectedPreset = QUALITY_PRESETS.find((p) => p.value === crf);
   const savings = outputSize && inputSize ? Math.round((1 - outputSize / inputSize) * 100) : null;
 
   return (
