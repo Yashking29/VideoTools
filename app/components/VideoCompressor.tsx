@@ -33,27 +33,35 @@ export default function VideoCompressor() {
     const ffmpeg = new FFmpeg();
     ffmpeg.on("progress", ({ progress: p }) => setProgress(Math.round(p * 100)));
     ffmpeg.on("log", ({ message }) => setLog(message));
-    const mtURL = "https://unpkg.com/@ffmpeg/core-mt@0.12.6/dist/esm";
     const stURL = "https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd";
     const canMultiThread = typeof SharedArrayBuffer !== "undefined";
+    console.log("[FFmpeg/Compressor] SharedArrayBuffer available:", canMultiThread);
     if (canMultiThread) {
       try {
+        console.log("[FFmpeg/Compressor] Attempting multi-threaded load from /ffmpeg-mt/");
         await ffmpeg.load({
-          coreURL: await toBlobURL(`${mtURL}/ffmpeg-core.js`, "text/javascript"),
-          wasmURL: `${mtURL}/ffmpeg-core.wasm`,
-          workerURL: `${mtURL}/ffmpeg-core.worker.js`,
+          coreURL: await toBlobURL("/ffmpeg-mt/ffmpeg-core.js", "text/javascript"),
+          wasmURL: "/ffmpeg-mt/ffmpeg-core.wasm",
+          workerURL: "/ffmpeg-mt/ffmpeg-core.worker.js",
         });
-      } catch {
+        console.log("[FFmpeg/Compressor] Multi-threaded load SUCCESS");
+      } catch (err) {
+        console.error("[FFmpeg/Compressor] Multi-threaded load FAILED:", err);
+        console.log("[FFmpeg/Compressor] Falling back to single-threaded (CDN)");
         await ffmpeg.load({
           coreURL: await toBlobURL(`${stURL}/ffmpeg-core.js`, "text/javascript"),
           wasmURL: await toBlobURL(`${stURL}/ffmpeg-core.wasm`, "application/wasm"),
         });
+        console.log("[FFmpeg/Compressor] Single-threaded fallback load SUCCESS");
       }
     } else {
+      console.log("[FFmpeg/Compressor] SharedArrayBuffer unavailable — loading single-threaded (CDN)");
+      console.log("[FFmpeg/Compressor] Fix: ensure COOP/COEP headers (Cross-Origin-Opener-Policy: same-origin, Cross-Origin-Embedder-Policy: require-corp)");
       await ffmpeg.load({
         coreURL: await toBlobURL(`${stURL}/ffmpeg-core.js`, "text/javascript"),
         wasmURL: await toBlobURL(`${stURL}/ffmpeg-core.wasm`, "application/wasm"),
       });
+      console.log("[FFmpeg/Compressor] Single-threaded load SUCCESS");
     }
     ffmpegRef.current = ffmpeg;
     return ffmpeg;
