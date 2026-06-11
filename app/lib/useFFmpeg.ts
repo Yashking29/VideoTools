@@ -24,7 +24,7 @@ export function useFFmpeg() {
         try {
           console.log("[FFmpeg] Attempting multi-threaded load from /ffmpeg-mt/");
           await ffmpeg.load({
-            coreURL: await toBlobURL("/ffmpeg-mt/ffmpeg-core.js", "text/javascript"),
+            coreURL: "/ffmpeg-mt/ffmpeg-core.js",
             wasmURL: "/ffmpeg-mt/ffmpeg-core.wasm",
             workerURL: "/ffmpeg-mt/ffmpeg-core.worker.js",
           });
