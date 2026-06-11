@@ -4,7 +4,7 @@ import { useRef, useCallback } from "react";
 import { FFmpeg } from "@ffmpeg/ffmpeg";
 import { toBlobURL } from "@ffmpeg/util";
 
-const CORE_BASE = "https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd";
+const CORE_BASE = "https://unpkg.com/@ffmpeg/core-mt@0.12.6/dist/esm";
 
 export function useFFmpeg() {
   const ffmpegRef = useRef<FFmpeg | null>(null);
@@ -21,6 +21,7 @@ export function useFFmpeg() {
       await ffmpeg.load({
         coreURL: await toBlobURL(`${CORE_BASE}/ffmpeg-core.js`, "text/javascript"),
         wasmURL: await toBlobURL(`${CORE_BASE}/ffmpeg-core.wasm`, "application/wasm"),
+        workerURL: await toBlobURL(`${CORE_BASE}/ffmpeg-core.worker.js`, "text/javascript"),
       });
       ffmpegRef.current = ffmpeg;
       return ffmpeg;

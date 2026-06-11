@@ -31,12 +31,13 @@ export default function VideoCompressor() {
   const loadFFmpeg = useCallback(async () => {
     if (ffmpegRef.current) return ffmpegRef.current;
     const ffmpeg = new FFmpeg();
-    const baseURL = "https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd";
+    const mtURL = "https://unpkg.com/@ffmpeg/core-mt@0.12.6/dist/esm";
     ffmpeg.on("progress", ({ progress: p }) => setProgress(Math.round(p * 100)));
     ffmpeg.on("log", ({ message }) => setLog(message));
     await ffmpeg.load({
-      coreURL: await toBlobURL(`${baseURL}/ffmpeg-core.js`, "text/javascript"),
-      wasmURL: await toBlobURL(`${baseURL}/ffmpeg-core.wasm`, "application/wasm"),
+      coreURL: await toBlobURL(`${mtURL}/ffmpeg-core.js`, "text/javascript"),
+      wasmURL: await toBlobURL(`${mtURL}/ffmpeg-core.wasm`, "application/wasm"),
+      workerURL: await toBlobURL(`${mtURL}/ffmpeg-core.worker.js`, "text/javascript"),
     });
     ffmpegRef.current = ffmpeg;
     return ffmpeg;
