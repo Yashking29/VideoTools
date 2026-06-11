@@ -6,11 +6,19 @@ import { fetchFile, toBlobURL } from "@ffmpeg/util";
 
 type Status = "idle" | "loading" | "processing" | "done" | "error";
 
+const CORE_BASE = "https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd";
+
 const QUALITY_PRESETS = [
-  { label: "Light (better quality)", value: "28", reduction: "~30–40%" },
-  { label: "Medium (balanced)", value: "32", reduction: "~50–60%" },
-  { label: "Heavy (smallest size)", value: "38", reduction: "~70–80%" },
+  { label: "Light", value: "28", detail: "1080p · ~30–40% smaller" },
+  { label: "Medium", value: "32", detail: "720p · ~55–65% smaller" },
+  { label: "Heavy", value: "38", detail: "480p · ~70–80% smaller" },
 ];
+
+const SCALE: Record<string, string> = {
+  "28": "scale=-2:'min(1080,ih)'",
+  "32": "scale=-2:'min(720,ih)'",
+  "38": "scale=-2:'min(480,ih)'",
+};
 
 function formatBytes(bytes: number) {
   if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(0)} KB`;
@@ -33,36 +41,10 @@ export default function VideoCompressor() {
     const ffmpeg = new FFmpeg();
     ffmpeg.on("progress", ({ progress: p }) => setProgress(Math.round(p * 100)));
     ffmpeg.on("log", ({ message }) => setLog(message));
-    const stURL = "https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd";
-    const canMultiThread = typeof SharedArrayBuffer !== "undefined";
-    console.log("[FFmpeg/Compressor] SharedArrayBuffer available:", canMultiThread);
-    if (canMultiThread) {
-      try {
-        console.log("[FFmpeg/Compressor] Attempting multi-threaded load from /ffmpeg-mt/");
-        await ffmpeg.load({
-          coreURL: "/ffmpeg-mt/ffmpeg-core.js",
-          wasmURL: "/ffmpeg-mt/ffmpeg-core.wasm",
-          workerURL: "/ffmpeg-mt/ffmpeg-core.worker.js",
-        });
-        console.log("[FFmpeg/Compressor] Multi-threaded load SUCCESS");
-      } catch (err) {
-        console.error("[FFmpeg/Compressor] Multi-threaded load FAILED:", err);
-        console.log("[FFmpeg/Compressor] Falling back to single-threaded (CDN)");
-        await ffmpeg.load({
-          coreURL: await toBlobURL(`${stURL}/ffmpeg-core.js`, "text/javascript"),
-          wasmURL: await toBlobURL(`${stURL}/ffmpeg-core.wasm`, "application/wasm"),
-        });
-        console.log("[FFmpeg/Compressor] Single-threaded fallback load SUCCESS");
-      }
-    } else {
-      console.log("[FFmpeg/Compressor] SharedArrayBuffer unavailable — loading single-threaded (CDN)");
-      console.log("[FFmpeg/Compressor] Fix: ensure COOP/COEP headers (Cross-Origin-Opener-Policy: same-origin, Cross-Origin-Embedder-Policy: require-corp)");
-      await ffmpeg.load({
-        coreURL: await toBlobURL(`${stURL}/ffmpeg-core.js`, "text/javascript"),
-        wasmURL: await toBlobURL(`${stURL}/ffmpeg-core.wasm`, "application/wasm"),
-      });
-      console.log("[FFmpeg/Compressor] Single-threaded load SUCCESS");
-    }
+    await ffmpeg.load({
+      coreURL: await toBlobURL(`${CORE_BASE}/ffmpeg-core.js`, "text/javascript"),
+      wasmURL: await toBlobURL(`${CORE_BASE}/ffmpeg-core.wasm`, "application/wasm"),
+    });
     ffmpegRef.current = ffmpeg;
     return ffmpeg;
   }, []);
@@ -106,13 +88,14 @@ export default function VideoCompressor() {
         "-vcodec", "libx264",
         "-crf", crf,
         "-preset", "fast",
+        "-vf", SCALE[crf],
         "-acodec", "aac",
         "-b:a", "128k",
+        "-movflags", "+faststart",
         outputName,
       ]);
 
       const data = await ffmpeg.readFile(outputName);
-      // Copy out of SharedArrayBuffer into a plain ArrayBuffer for Blob compatibility
       const blob = new Blob([new Uint8Array(data as Uint8Array)], { type: "video/mp4" });
       setOutputSize(blob.size);
       if (outputURL) URL.revokeObjectURL(outputURL);
@@ -178,7 +161,7 @@ export default function VideoCompressor() {
                 }`}
               >
                 <p className="font-medium text-sm">{preset.label}</p>
-                <p className="text-xs text-gray-500 mt-0.5">{preset.reduction} reduction</p>
+                <p className="text-xs text-gray-500 mt-0.5">{preset.detail}</p>
               </button>
             ))}
           </div>
@@ -245,7 +228,6 @@ export default function VideoCompressor() {
         </div>
       )}
 
-      {/* Privacy note */}
       <p className="text-center text-xs text-gray-400 mt-6">
         🔒 Your video is processed locally — it never leaves your device.
       </p>

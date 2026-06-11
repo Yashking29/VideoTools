@@ -1,5 +1,4 @@
 import type { NextConfig } from "next";
-import path from "path";
 
 const nextConfig: NextConfig = {
   reactCompiler: true,
@@ -13,13 +12,6 @@ const nextConfig: NextConfig = {
         ],
       },
     ];
-  },
-  webpack(config) {
-    config.module.rules.push({
-      test: /node_modules[\\/]@ffmpeg[\\/]ffmpeg[\\/]dist[\\/]esm[\\/]worker\.js$/,
-      loader: path.resolve("./loaders/ffmpeg-worker-patch.cjs"),
-    });
-    return config;
   },
 };
 
